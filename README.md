@@ -35,9 +35,9 @@
 
 ## 已收录模型结果
 
-| 模型 | 运行时 / Agent | 自动化测试 | 关卡验证 | 浏览器控制台错误 | 自评分 | DELIVERY_STATUS |
-| --- | --- | --- | --- | --- | --- | --- |
-| deepseek-v4-pro | DeepSeek Harness | 61 / 61 通过 | 35 / 35 通过 | 0 | 96 / 100 | PASS |
+| 模型 | 运行时 / Agent | 自动化测试 | 关卡验证 | 浏览器控制台错误 | 自评分 | DELIVERY_STATUS | 在线试玩 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| deepseek-v4-pro | DeepSeek Harness | 61 / 61 通过 | 35 / 35 通过 | 0 | 96 / 100 | PASS | [dsh-tank-game.icxl.net](https://dsh-tank-game.icxl.net/) |
 
 ## 快速开始（运行某个模型的结果）
 

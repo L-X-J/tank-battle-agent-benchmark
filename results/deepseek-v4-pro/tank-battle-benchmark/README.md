@@ -76,6 +76,9 @@ npm test      # 运行全部自动化测试（61 个用例）
 
 本游戏是纯前端项目，部署到网站**不需要 Node 服务器、不需要构建/编译**，只要静态托管。
 
+> 🕹️ **在线试玩**：[https://dsh-tank-game.icxl.net/](https://dsh-tank-game.icxl.net/)
+> （由 deepseek-v4-pro 产出的 `dist/` 部署包部署）
+
 ```bash
 # 在本项目目录下执行：
 npm run build    # 生成 dist/ 部署目录（27 个文件）
