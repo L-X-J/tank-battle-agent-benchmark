@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# 依赖（本项目零第三方依赖，防御性忽略）
+node_modules/
+
+# 日志与临时文件
+*.log
+npm-debug.log*
+
+# 本地临时目录
+/tmp/
