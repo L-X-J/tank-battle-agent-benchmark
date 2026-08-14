@@ -27,7 +27,6 @@
          ├─ index.html / styles.css       入口与样式
          ├─ src/                          游戏源码（逻辑与渲染分离）
          ├─ tests/                        自动化测试（node:test）
-         ├─ dist/                         部署包（npm run build 生成）
          ├─ artifacts/                    浏览器验收截图
          └─ README.md / ARCHITECTURE.md
              QA_REPORT.md / BENCHMARK_REPORT.md   该模型自写的文档
@@ -46,7 +45,7 @@ cd results/deepseek-v4-pro/tank-battle-benchmark
 
 npm start        # 启动本地服务器 → http://localhost:8080
 npm test         # 运行全部自动化测试（61 个用例）
-npm run build    # 生成 dist/ 部署包（可直接上传静态托管）
+npm run build    # 可选：本地生成部署目录（产物不入库，见 .gitignore）
 ```
 
 > 该项目零第三方依赖，无需 `npm install`；浏览器打开 `http://localhost:8080` 即可游玩。

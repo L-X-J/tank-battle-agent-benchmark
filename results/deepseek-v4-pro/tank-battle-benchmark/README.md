@@ -28,8 +28,7 @@ tank-battle-benchmark/
 ├─ package.json          npm 脚本（start / test / build）
 ├─ npm                   轻量 npm 兼容脚本（本机无 npm 时使用 ./npm start）
 ├─ server.mjs            零依赖静态服务器（本地预览）
-├─ build.mjs             打包脚本（生成 dist/ 部署目录）
-├─ dist/                 部署产物（npm run build 生成，可直接上传静态托管）
+├─ build.mjs             可选打包脚本（本地生成部署目录，产物不入库）
 ├─ README.md             本文件
 ├─ ARCHITECTURE.md       架构说明
 ├─ QA_REPORT.md          逐项验收记录
@@ -77,28 +76,20 @@ npm test      # 运行全部自动化测试（61 个用例）
 本游戏是纯前端项目，部署到网站**不需要 Node 服务器、不需要构建/编译**，只要静态托管。
 
 > 🕹️ **在线试玩**：[https://dsh-tank-game.icxl.net/](https://dsh-tank-game.icxl.net/)
-> （由 deepseek-v4-pro 产出的 `dist/` 部署包部署）
+
+本地部署流程（产物只在本地生成，不会提交到仓库，`.gitignore` 已排除部署目录）：
 
 ```bash
 # 在本项目目录下执行：
-npm run build    # 生成 dist/ 部署目录（27 个文件）
+npm run build    # 本地生成部署目录
 ```
 
-`dist/` 只包含运行必需的资源：
-
-```text
-dist/
-├─ index.html
-├─ styles.css
-└─ src/**            # 全部 ES 模块
-```
-
-- 把 `dist/` 目录内的内容整体上传到任意静态托管即可：Nginx、Apache、GitHub Pages、Netlify、Vercel、Cloudflare Pages、对象存储（OSS/COS/S3 静态网站）等
+- 将生成的部署目录内容上传到任意静态托管即可：Nginx、Apache、GitHub Pages、Netlify、Vercel、Cloudflare Pages、对象存储（OSS/COS/S3 静态网站）等
 - 所有引用路径均为相对路径，因此**既能在根路径部署，也能部署在子路径**（例如 `https://example.com/game/`）
 - 游戏完全离线运行、零第三方依赖、无网络请求，托管在任何 HTTPS 或 HTTP 域名下均可直接游玩
 - 本地预览用 `npm start`（http://localhost:8080），线上用静态托管；两者行为一致
 
-> 已实测：`dist/` 通过纯静态服务器（python3 http.server）加载，浏览器进入主菜单 → 单人模式 `PLAYING`，控制台 **0 错误**。
+> 已实测：部署产物通过纯静态服务器加载，浏览器进入主菜单 → 单人模式 `PLAYING`，控制台 **0 错误**。
 
 ## 操作按键
 
