@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+// Minimal npm-compatible CLI shim.
+//
+// The delivery environment ships Node.js v24 without the npm CLI. This tiny
+// dependency-free shim provides the exact commands the project requires:
+//   ./npm start        -> node server.mjs
+//   ./npm test         -> node --test tests/
+//   ./npm run <name>   -> any other package.json script
+//
+// In any environment where the real npm CLI exists, the standard commands
+// `npm start` / `npm test` work identically against the same package.json.
+import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
+const root = dirname(fileURLToPath(import.meta.url));
+const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+const args = process.argv.slice(2);
+const name = args[0];
+
+if (name === '--version' || name === '-v') {
+  console.log(pkg.version);
+  process.exit(0);
+}
+
+let script = null;
+let scriptName = name;
+if (name === 'start') {
+  script = pkg.scripts.start;
+} else if (name === 'test' || name === 't' || name === 'tst') {
+  script = pkg.scripts.test;
+  scriptName = 'test';
+} else if (name === 'run' || name === 'run-script') {
+  scriptName = args[1];
+  script = pkg.scripts[scriptName];
+}
+
+if (!script) {
+  console.error(`npm-shim: unknown script "${args.join(' ')}"`);
+  console.error('available scripts:', Object.keys(pkg.scripts || {}).join(', '));
+  process.exit(1);
+}
+
+const extra = args.slice(name === 'run' || name === 'run-script' ? 2 : 1).join(' ');
+const cmd = extra ? `${script} ${extra}` : script;
+console.log(`\n> ${pkg.name}@${pkg.version} ${scriptName}`);
+console.log(`> ${cmd}\n`);
+const res = spawnSync('/bin/sh', ['-c', cmd], { cwd: root, stdio: 'inherit', env: process.env });
+process.exit(res.status === null ? 1 : res.status);

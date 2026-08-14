@@ -1,0 +1,16 @@
+{
+  "name": "steel-front",
+  "version": "1.0.0",
+  "private": true,
+  "description": "STEEL FRONT — an original tank battle game. HTML5 Canvas + vanilla ES2022 JavaScript, zero third-party dependencies, fully offline.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test \"tests/*.test.js\"",
+    "build": "node build.mjs"
+  },
+  "license": "MIT"
+}
